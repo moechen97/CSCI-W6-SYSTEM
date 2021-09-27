@@ -11,6 +11,7 @@ public class PassengerSpriteCollider : MonoBehaviour
     private Passenger _parentPassenger;
     private SpriteRenderer _spriteRenderer;
     private AngerBar _angerBar;
+    private ScreenShake _CameraShake;
     
 
     // Start is called before the first frame update
@@ -19,6 +20,7 @@ public class PassengerSpriteCollider : MonoBehaviour
         _parentPassenger = transform.parent.GetComponent<Passenger>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _angerBar = FindObjectOfType<AngerBar>();
+        _CameraShake = FindObjectOfType<ScreenShake>();
     }
 
     // Update is called once per frame
@@ -30,6 +32,7 @@ public class PassengerSpriteCollider : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         Instantiate(explodeParticle, transform.position, quaternion.identity);
+        _CameraShake.ShakeScreen();
         _parentPassenger.CrashHappended();
         _angerBar.CrashAddAnger();
         _spriteRenderer.color*= new Color(0.7f, 0.5f, 0.5f);

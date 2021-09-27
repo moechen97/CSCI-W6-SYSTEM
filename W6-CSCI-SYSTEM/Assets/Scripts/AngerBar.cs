@@ -7,6 +7,9 @@ public class AngerBar : MonoBehaviour
     [SerializeField] private float increaseExtent;
     [SerializeField] private float AngerBarIncreaseSpeed;
     [SerializeField] private float CrashIncreaseExtent;
+    [SerializeField] private GameObject failPannel;
+    [SerializeField] private AudioSource backgroundMusic;
+    [SerializeField] private float musicPitchIncreaseExtent;
 
     private bool isPiling=false;
     private bool TimerStart;
@@ -41,6 +44,11 @@ public class AngerBar : MonoBehaviour
                 TimerStart = false;
             }
         }
+
+        if (transform.localScale.x >= 1)
+        {
+            failPannel.SetActive(true);
+        }
         
         
     }
@@ -48,6 +56,7 @@ public class AngerBar : MonoBehaviour
     public void addAnger()
     {
         transform.localScale += new Vector3(increaseExtent, 0, 0);
+        backgroundMusic.pitch += musicPitchIncreaseExtent;
     }
     
 
@@ -59,5 +68,6 @@ public class AngerBar : MonoBehaviour
     public void CrashAddAnger()
     {
         transform.localScale += new Vector3(CrashIncreaseExtent, 0, 0);
+        backgroundMusic.pitch += musicPitchIncreaseExtent;
     }
 }
