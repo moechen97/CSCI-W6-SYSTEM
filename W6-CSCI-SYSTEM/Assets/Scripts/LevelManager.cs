@@ -99,4 +99,9 @@ public class LevelManager : MonoBehaviour
         }
         
     }
+
+    public void CannnotComplete()
+    {
+        isComplete = true;
+    }
 }
