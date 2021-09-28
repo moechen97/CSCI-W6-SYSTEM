@@ -35,6 +35,8 @@ public class Passenger : MonoBehaviour
     private Triangle manager;
     private LevelManager _levelManager;
     private AngerBar _angerBar;
+
+    private AudioSource successfulPassSound;
     
     // Start is called before the first frame update
     void Start()
@@ -53,7 +55,8 @@ public class Passenger : MonoBehaviour
         movingSpeed = _PManager.getMovingSpeed();
         level1Buffer = _PManager.getLevel1Buffer();
         level2Buffer = _PManager.getLevel2Buffer();
-        
+
+        successfulPassSound = FindObjectOfType<SuccessfullySound>().transform.GetComponent<AudioSource>();
         
         timeCount = 0;
         timeLetThisMove=true;
@@ -265,11 +268,13 @@ public class Passenger : MonoBehaviour
             if (directionType == 0  && positionJudge == -1f)
             {
                 _levelManager.AddOneCount();
+                successfulPassSound.Play();
                 isCount = true;
             }
             else if (directionType == 1 && positionJudge2==-1f)
             {
                 _levelManager.AddOneCount();
+                successfulPassSound.Play();
                 isCount = true;
             }
         }

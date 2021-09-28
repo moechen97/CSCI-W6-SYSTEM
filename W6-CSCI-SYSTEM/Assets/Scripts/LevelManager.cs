@@ -16,12 +16,16 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject level2Buffer1;
     [SerializeField] private GameObject level2Buffer2;
     [SerializeField] private AudioSource CompleteSound;
+    [SerializeField] private GameObject verticalPassengerP;
+    [SerializeField] private GameObject horizontalPassengerP;
+    
     private int PassCarCount = 0;
     private bool islevel1 = true;
     private bool islevel2 = false;
     private bool isComplete = false;
 
     private bool AlreadyChangeLevel = false;
+    private int wholePassenger = 0;
 
     private CinemachineVirtualCamera _cinemachineVirtual;
     
@@ -29,6 +33,8 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         _cinemachineVirtual = levelOneCamera.GetComponent<CinemachineVirtualCamera>();
+        wholePassenger = verticalPassengerP.transform.childCount + horizontalPassengerP.transform.childCount;
+        Debug.Log("whole passenger"+wholePassenger);
     }
 
     // Update is called once per frame
@@ -56,7 +62,7 @@ public class LevelManager : MonoBehaviour
             level2Buffer2.SetActive(true);
         }
         
-        if (PassCarCount >= WholeLevelCount&&!isComplete)
+        if (PassCarCount >= wholePassenger&&!isComplete)
         {
             CompleteSound.Play();
             Instantiate(FinishGameParticle, transform.position, quaternion.identity);
@@ -66,7 +72,7 @@ public class LevelManager : MonoBehaviour
 
     public void AddOneCount()
     {
-        PassCarCount++;
+        PassCarCount+=1;
     }
 
     public int levelState()
