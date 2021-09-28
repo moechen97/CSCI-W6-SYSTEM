@@ -10,6 +10,7 @@ public class AngerBar : MonoBehaviour
     [SerializeField] private GameObject failPannel;
     [SerializeField] private AudioSource backgroundMusic;
     [SerializeField] private float musicPitchIncreaseExtent;
+    [SerializeField] private AudioClip[] _angrySounds;
 
     private bool isPiling=false;
     private bool TimerStart;
@@ -18,11 +19,13 @@ public class AngerBar : MonoBehaviour
     private float timeRecord;
 
     private bool canAddAnger;
+
+    private AudioSource complain;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        complain = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -56,6 +59,9 @@ public class AngerBar : MonoBehaviour
     public void addAnger()
     {
         transform.localScale += new Vector3(increaseExtent, 0, 0);
+        int x = Random.Range(0, _angrySounds.Length);
+        complain.clip = _angrySounds[x];
+        complain.Play();
         backgroundMusic.pitch += musicPitchIncreaseExtent;
     }
     
