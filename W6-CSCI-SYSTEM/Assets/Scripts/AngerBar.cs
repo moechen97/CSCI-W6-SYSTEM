@@ -21,11 +21,13 @@ public class AngerBar : MonoBehaviour
     private bool canAddAnger;
 
     private AudioSource complain;
+    private LevelManager _level;
     
     // Start is called before the first frame update
     void Start()
     {
         complain = GetComponent<AudioSource>();
+        _level = FindObjectOfType<LevelManager>();
     }
 
     // Update is called once per frame
@@ -50,7 +52,9 @@ public class AngerBar : MonoBehaviour
 
         if (transform.localScale.x >= 1)
         {
+            
             failPannel.SetActive(true);
+            _level.CannnotComplete();
         }
         
         

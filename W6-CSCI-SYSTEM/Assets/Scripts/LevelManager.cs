@@ -18,6 +18,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private AudioSource CompleteSound;
     [SerializeField] private GameObject verticalPassengerP;
     [SerializeField] private GameObject horizontalPassengerP;
+    [SerializeField] private GameObject WinPanel;
     
     private int PassCarCount = 0;
     private bool islevel1 = true;
@@ -66,10 +67,17 @@ public class LevelManager : MonoBehaviour
         {
             CompleteSound.Play();
             Instantiate(FinishGameParticle, transform.position, quaternion.identity);
+            Invoke("winPanelAppear",4f);
             isComplete = true;
         }
     }
 
+
+    void winPanelAppear()
+    {
+        WinPanel.SetActive(true);
+    }
+    
     public void AddOneCount()
     {
         PassCarCount+=1;
@@ -90,5 +98,10 @@ public class LevelManager : MonoBehaviour
             return 0;
         }
         
+    }
+
+    public void CannnotComplete()
+    {
+        isComplete = true;
     }
 }
